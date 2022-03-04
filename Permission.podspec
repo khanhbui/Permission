@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
   s.source        = { :git => 'https://github.com/delba/Permission.git', :tag => s.version }
   s.swift_version = '5.1'
 
-  s.weak_framework = 'Speech'
+  s.weak_frameworks = 'Speech', 'AppTrackingTransparency'
 
   s.ios.deployment_target = '10.0'
 
@@ -83,5 +83,10 @@ Pod::Spec.new do |s|
   s.subspec 'Siri' do |ab|
     ab.dependency 'Permission/Core'
     ab.pod_target_xcconfig = { 'SWIFT_ACTIVE_COMPILATION_CONDITIONS'  => 'PERMISSION_SIRI' }
+  end
+
+  s.subspec 'AppTrackingTransparency' do |at|
+    at.dependency 'Permission/Core'
+    at.pod_target_xcconfig = { 'SWIFT_ACTIVE_COMPILATION_CONDITIONS'  => 'PERMISSION_APP_TRACKING_TRANSPARENCY' }
   end
 end
