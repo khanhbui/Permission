@@ -38,6 +38,11 @@ extension Permission {
     }
 
     func requestReminders(_ callback: @escaping Callback) {
+        guard let _ = Foundation.Bundle.main.object(forInfoDictionaryKey: .remindersUsageDescription) else {
+            print("WARNING: \(String.remindersUsageDescription) not found in Info.plist")
+            return
+        }
+
         EKEventStore().requestAccess(to: .reminder) { _, _ in
             callback(self.statusReminders)
         }

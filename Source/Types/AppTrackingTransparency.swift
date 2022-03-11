@@ -11,7 +11,9 @@ import AppTrackingTransparency
 
 extension Permission {
     var statusAppTrackingTransparency: PermissionStatus {
-        guard #available(iOS 14.0, *) else { fatalError() }
+        guard #available(iOS 14.0, *) else {
+            return .authorized
+        }
 
         let status = ATTrackingManager.trackingAuthorizationStatus
 
@@ -24,7 +26,10 @@ extension Permission {
     }
 
     func requestAppTrackingTransparency(_ callback: @escaping Callback) {
-        guard #available(iOS 14.0, *) else { fatalError() }
+        guard #available(iOS 14.0, *) else {
+            callback(self.statusAppTrackingTransparency)
+            return
+        }
 
         guard let _ = Bundle.main.object(forInfoDictionaryKey: .appTrackingTransparencyUsageDescription) else {
             print("WARNING: \(String.appTrackingTransparencyUsageDescription) not found in Info.plist")

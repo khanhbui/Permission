@@ -40,6 +40,11 @@ extension Permission {
     }
 
     func requestLocationWhenInUse(_ callback: Callback) {
+        guard let _ = Foundation.Bundle.main.object(forInfoDictionaryKey: .locationAlwaysUsageDescription) else {
+            print("WARNING: \(String.locationAlwaysUsageDescription) not found in Info.plist")
+            return
+        }
+
         guard let _ = Foundation.Bundle.main.object(forInfoDictionaryKey: .locationWhenInUseUsageDescription) else {
             print("WARNING: \(String.locationWhenInUseUsageDescription) not found in Info.plist")
             return

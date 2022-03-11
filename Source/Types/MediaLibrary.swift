@@ -27,7 +27,9 @@ import MediaPlayer
 
 extension Permission {
     var statusMediaLibrary: PermissionStatus {
-        guard #available(iOS 9.3, *) else { fatalError() }
+        guard #available(iOS 9.3, *) else {
+            return .authorized
+        }
 
         let status = MPMediaLibrary.authorizationStatus()
 
@@ -40,7 +42,10 @@ extension Permission {
     }
 
     func requestMediaLibrary(_ callback: @escaping Callback) {
-        guard #available(iOS 9.3, *) else { fatalError() }
+        guard #available(iOS 9.3, *) else {
+            callback(self.statusMediaLibrary)
+            return
+        }
 
         guard let _ = Bundle.main.object(forInfoDictionaryKey: .mediaLibraryUsageDescription) else {
             print("WARNING: \(String.mediaLibraryUsageDescription) not found in Info.plist")

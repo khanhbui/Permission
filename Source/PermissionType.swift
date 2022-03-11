@@ -65,19 +65,19 @@ public enum PermissionType {
     #endif
 
     #if PERMISSION_SPEECH_RECOGNIZER
-    @available(iOS 10.0, *) case speechRecognizer
+    case speechRecognizer
     #endif
 
     #if PERMISSION_MEDIA_LIBRARY
-    @available(iOS 9.3, *) case mediaLibrary
+    case mediaLibrary
     #endif
 
     #if PERMISSION_SIRI
-    @available(iOS 10.0, *) case siri
+    case siri
     #endif
 
     #if PERMISSION_APP_TRACKING_TRANSPARENCY
-    @available(iOS 14.0, *) case appTrackingTransparency
+    case appTrackingTransparency
     #endif
 
     case never

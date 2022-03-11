@@ -27,7 +27,9 @@ import Intents
 
 extension Permission {
     var statusSiri: PermissionStatus {
-        guard #available(iOS 10.0, *) else { fatalError() }
+        guard #available(iOS 10.0, *) else {
+            return .authorized
+        }
 
         let status = INPreferences.siriAuthorizationStatus()
 
@@ -40,7 +42,10 @@ extension Permission {
     }
 
     func requestSiri(_ callback: @escaping Callback) {
-        guard #available(iOS 10.0, *) else { fatalError() }
+        guard #available(iOS 10.0, *) else {
+            callback(self.statusSiri)
+            return
+        }
 
         guard let _ = Bundle.main.object(forInfoDictionaryKey: .siriUsageDescription) else {
             print("WARNING: \(String.siriUsageDescription) not found in Info.plist")

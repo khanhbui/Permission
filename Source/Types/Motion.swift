@@ -37,6 +37,11 @@ extension Permission {
     }
 
     func requestMotion(_ callback: Callback?) {
+        guard let _ = Foundation.Bundle.main.object(forInfoDictionaryKey: .motionUsageDescription) else {
+            print("WARNING: \(String.motionUsageDescription) not found in Info.plist")
+            return
+        }
+
         Defaults.requestedMotion = true
 
         let now = Date()
@@ -57,6 +62,11 @@ extension Permission {
     }
 
     private var synchronousStatusMotion: PermissionStatus {
+        guard let _ = Foundation.Bundle.main.object(forInfoDictionaryKey: .motionUsageDescription) else {
+            print("WARNING: \(String.motionUsageDescription) not found in Info.plist")
+            return .notDetermined
+        }
+
         let semaphore = DispatchSemaphore(value: 0)
 
         var status: PermissionStatus = .notDetermined

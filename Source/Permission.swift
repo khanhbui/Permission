@@ -75,25 +75,21 @@ open class Permission: NSObject {
 
     #if PERMISSION_SPEECH_RECOGNIZER
     /// The permission to access the user's SpeechRecognizer.
-    @available(iOS 10.0, *)
     public static let speechRecognizer = Permission(type: .speechRecognizer)
     #endif
 
     #if PERMISSION_MEDIA_LIBRARY
     /// The permission to access the user's MediaLibrary.
-    @available(iOS 9.3, *)
     public static let mediaLibrary = Permission(type: .mediaLibrary)
     #endif
 
     #if PERMISSION_SIRI
     /// The permission to access the user's Siri.
-    @available(iOS 10.0, *)
     public static let siri = Permission(type: .siri)
     #endif
 
     #if PERMISSION_APP_TRACKING_TRANSPARENCY
     /// The permission to access app-related data for tracking the user or the device.
-    @available(iOS 14.0, *)
     public static let appTrackingTransparency = Permission(type: .appTrackingTransparency)
     #endif
 

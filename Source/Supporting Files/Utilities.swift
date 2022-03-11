@@ -89,6 +89,10 @@ struct Defaults {
 }
 
 extension String {
+    static let contactsUsageDescription                = "NSContactsUsageDescription"
+    static let eventsUsageDescription                  = "NSCalendarsUsageDescription"
+    static let remindersUsageDescription               = "NSRemindersUsageDescription"
+    static let motionUsageDescription                  = "NSMotionUsageDescription"
     static let locationWhenInUseUsageDescription       = "NSLocationWhenInUseUsageDescription"
     static let locationAlwaysUsageDescription          = "NSLocationAlwaysUsageDescription"
     static let microphoneUsageDescription              = "NSMicrophoneUsageDescription"

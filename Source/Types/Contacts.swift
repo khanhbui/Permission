@@ -27,7 +27,9 @@ import Contacts
 
 extension Permission {
     var statusContacts: PermissionStatus {
-        guard #available(iOS 9.0, *) else { fatalError() }
+        guard #available(iOS 9.0, *) else {
+            return .authorized
+        }
 
         let status = CNContactStore.authorizationStatus(for: .contacts)
 
@@ -40,7 +42,15 @@ extension Permission {
     }
 
     func requestContacts(_ callback: @escaping Callback) {
-        guard #available(iOS 9.0, *) else { fatalError() }
+        guard #available(iOS 9.0, *) else {
+            callback(self.statusContacts)
+            return
+        }
+
+        guard let _ = Foundation.Bundle.main.object(forInfoDictionaryKey: .contactsUsageDescription) else {
+            print("WARNING: \(String.contactsUsageDescription) not found in Info.plist")
+            return
+        }
 
         CNContactStore().requestAccess(for: .contacts) { _, _ in
             callback(self.statusContacts)

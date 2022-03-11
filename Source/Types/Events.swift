@@ -38,6 +38,11 @@ extension Permission {
     }
 
     func requestEvents(_ callback: @escaping Callback) {
+        guard let _ = Foundation.Bundle.main.object(forInfoDictionaryKey: .eventsUsageDescription) else {
+            print("WARNING: \(String.eventsUsageDescription) not found in Info.plist")
+            return
+        }
+
         EKEventStore().requestAccess(to: .event) { _, _ in
             callback(self.statusEvents)
         }
